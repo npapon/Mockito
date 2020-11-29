@@ -11,6 +11,7 @@ import modeleDonnees.ModeleDeCalcul;
 class calculateurServiceTest {
 
     Calculateur        calculateur        = new Calculateur();
+    //
     CalculateurService calculateurService = new CalculateurServiceImplementation( calculateur );
 
     @Test
