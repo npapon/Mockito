@@ -7,7 +7,9 @@
      <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>12</maven.compiler.release>
+        <maven.compiler.source>12</maven.compiler.source>
         <maven.compiler.target>${maven.compiler.source}</maven.compiler.target>
+  <dep.junit.version>5.6.2</dep.junit.version>
     </properties>
     
     
@@ -17,8 +19,22 @@
 <dependency>
     <groupId>org.junit.jupiter</groupId>
     <artifactId>junit-jupiter</artifactId>
-    <version>5.6.2</version>
+    <version>${dep.junit.version}</version>
     <scope>test</scope>  
+</dependency>
+    <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${dep.junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+    
+    <!-- https://mvnrepository.com/artifact/org.mockito/mockito-junit-jupiter -->
+<dependency>
+    <groupId>org.mockito</groupId>
+    <artifactId>mockito-junit-jupiter</artifactId>
+    <version>3.6.0</version>
+    <scope>test</scope>
 </dependency>
     
          <dependency>
