@@ -25,10 +25,12 @@ class calculateurServiceTest {
     @Mock
     Calculateur        calculateur;
     CalculateurService calculateurService;
+    @Mock
+    ResultatFormateur  resultatFormateur;
 
     @BeforeEach
     public void init() {
-        calculateurService = new CalculateurServiceImplementation( calculateur );
+        calculateurService = new CalculateurServiceImplementation( calculateur, resultatFormateur );
     }
     /*
      * @Test void testretourneModeleDeCalculAvecSolution() { ModeleDeCalcul
@@ -48,7 +50,9 @@ class calculateurServiceTest {
         // when et then return sont des méthodes de mockito qui permettent de
         // dire dans un cas précis ce que doit retourner la méthode add de
         // Calculateur sans l'intelligence derriere
+
         when( calculateur.add( 6, 5 ) ).thenReturn( 11 );
+
         // QUAND (WHEN)
         ModeleDeCalcul modeleDeCalculSansSolution = new ModeleDeCalcul( Operateur.ADDITION, 6, 5 );
         // calculateurService.retourneModeleDeCalculAvecSolution va utiliser
@@ -61,6 +65,24 @@ class calculateurServiceTest {
         // simulation de la méthode avec les arguments 6 et 5
         verify( calculateur ).add( 6, 5 );
         assertThat( solution ).isEqualTo( 11 );
+
+    }
+
+    @Test
+    public void retourneModeleDeCalculAvecSolution_doitFormerLeResultat_quandOnFaitUneAddition() {
+        // GIVEN
+        // ca change pas ca, l'addition fait toujours 13000
+        when( calculateur.add( 10000, 3000 ) ).thenReturn( 13000 );
+        when( resultatFormateur.formatage( 13000 ) ).thenReturn( "13 000" );
+        ModeleDeCalcul modeleDeCalculSansSolution = new ModeleDeCalcul( Operateur.ADDITION, 10000, 3000 );
+
+        // WHEN
+
+        final String resultatFormate = calculateurService.retourneModeleDeCalculAvecSolution( modeleDeCalculSansSolution )
+                .getResultatFormate();
+        // THEN
+
+        resultatFormate.equals( "13 000" );
 
     }
 }

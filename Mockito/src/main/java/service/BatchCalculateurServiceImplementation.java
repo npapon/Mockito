@@ -22,6 +22,11 @@ public class BatchCalculateurServiceImplementation implements BatchCalculateurSe
     public List<ModeleDeCalcul> batchCalcul( Stream<String> operationsEcritesEnString ) {
 
         // map permet d'appliquer des actions sur des éléments d'un stream.
+        // ici on à un stream d'opération avec des String
+        // pour chaque élément du stream, map applique la méthode
+        // retourneModeleDeCalculAvecSolution qui va pour chaque opération créé
+        // un modeleDeCalculAvecSolution
+        // collect transforme enfin le stream en une list / map / array ...
         return operationsEcritesEnString.map( operationEcriteEnString -> calculateurService.retourneModeleDeCalculAvecSolution(
                 ModeleDeCalcul.creerUnModeleDeCalculAPartirDuneOperationSaisieEnString( operationEcriteEnString ) ) )
                 .collect( Collectors.toList() );

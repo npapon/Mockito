@@ -1,14 +1,18 @@
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Stream;
 
 import bean.Calculateur;
+import bean.Operateur;
 import modeleDonnees.ModeleDeCalcul;
 import service.BatchCalculateurService;
 import service.BatchCalculateurServiceImplementation;
 import service.CalculateurService;
 import service.CalculateurServiceImplementation;
+import service.ResultatFormateur;
+import service.ResultatFormateurImplementation;
 
 public class Main {
 
@@ -16,15 +20,23 @@ public class Main {
         ModeleDeCalcul modeleDeCalcul = ModeleDeCalcul.creerUnModeleDeCalculAPartirDuneOperationSaisieEnString( "2 * 2" );
 
         System.out.println( modeleDeCalcul );
+        ResultatFormateur resultatFormateur = new ResultatFormateurImplementation();
 
         Calculateur calculateur = new Calculateur();
 
-        CalculateurService calculateurService = new CalculateurServiceImplementation( calculateur );
+        CalculateurService calculateurService = new CalculateurServiceImplementation( calculateur, resultatFormateur );
 
         ModeleDeCalcul modeleDeCalculAvecResultat = calculateurService
                 .retourneModeleDeCalculAvecSolution( modeleDeCalcul );
 
         System.out.println( modeleDeCalculAvecResultat.toString() );
+
+        ;
+        System.out.println( "Resultat sans formatage" );
+        System.out.println( modeleDeCalculAvecResultat.getResultat() );
+
+        System.out.println( "Resultat avec formatage" );
+        System.out.println( modeleDeCalculAvecResultat.getResultatFormate() );
 
         ;
 
@@ -44,6 +56,12 @@ public class Main {
         while ( iterator.hasNext() ) {
             System.out.println( iterator.next().toString() );
         }
+
+        Random random = new Random();
+        ModeleDeCalcul modeleDeCalculSansSolution = new ModeleDeCalcul( Operateur.DIVISION, random.nextInt(), 0 );
+        // WHEN
+        calculateurService.retourneModeleDeCalculAvecSolution( modeleDeCalculSansSolution );
+
     }
 
 }

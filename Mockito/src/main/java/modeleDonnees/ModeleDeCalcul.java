@@ -14,6 +14,7 @@ public class ModeleDeCalcul {
     private Integer             argumentDroite;
     private Operateur           operateur;
     private Integer             resultat;
+    private String              resultatFormate;
 
     public ModeleDeCalcul( Operateur operateur, Integer argumentGauche, Integer argumentDroite ) {
         this.operateur = operateur;
@@ -21,11 +22,13 @@ public class ModeleDeCalcul {
         this.argumentDroite = argumentDroite;
     }
 
-    public ModeleDeCalcul( Operateur operateur, Integer argumentGauche, Integer argumentDroite, Integer resultat ) {
+    public ModeleDeCalcul( Operateur operateur, Integer argumentGauche, Integer argumentDroite, Integer resultat,
+            String resultatFormate ) {
         this.operateur = operateur;
         this.argumentGauche = argumentGauche;
         this.argumentDroite = argumentDroite;
         this.resultat = resultat;
+        this.resultatFormate = resultatFormate;
     }
 
     // cette méthode est static car elle sert à créer un modele de calcul donc
@@ -79,8 +82,18 @@ public class ModeleDeCalcul {
                 + " operateur " + this.operateur
                 + " argument droite " + this.argumentDroite
                 + " resultat "
-                + this.resultat;
+                + this.resultat
+                + " resultat formate "
+                + this.resultatFormate;
 
+    }
+
+    public String getResultatFormate() {
+        return resultatFormate;
+    }
+
+    public void setResultatFormate( String resultatFormate ) {
+        this.resultatFormate = resultatFormate;
     }
 
 }
