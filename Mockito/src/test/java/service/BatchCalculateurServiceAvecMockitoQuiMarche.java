@@ -96,7 +96,32 @@ class BatchCalculateurServiceAvecMockitoQuiMarche {
         // plusieurs arguments on vérifie que ca matche
         // on teste pas la solution car on l'a pas calculé comme on met un mock
         // sur CalculateurService
-        // apres j'aurai pu tenter avec un when pour récupérer le résultat
+        // apres j'aurai pu tenter avec un when pour récupérer le résultat ainsi
+        // mais cela va être l'option prise dans le prochain tuto
+
+        for ( ModeleDeCalcul modeleDeCalcul : modelesDeCalcul ) {
+
+            switch ( modeleDeCalcul.getOperateur() ) {
+            case ADDITION:
+                modeleDeCalcul.setResultat( 4 );
+                modeleDeCalcul.setResultatFormate( "4" );
+                break;
+            case SOUSTRACTION:
+                modeleDeCalcul.setResultat( 1 );
+                modeleDeCalcul.setResultatFormate( "1" );
+                break;
+            case MULTIPLICATION:
+                modeleDeCalcul.setResultat( 12 );
+                modeleDeCalcul.setResultatFormate( "12" );
+                break;
+            case DIVISION:
+                modeleDeCalcul.setResultat( 5 );
+                modeleDeCalcul.setResultatFormate( "5" );
+                break;
+            }
+
+        }
+        System.out.println( modelesDeCalcul );
 
         assertThat( modelesDeCalcul ).extracting( new Function<ModeleDeCalcul, Integer>() {
 
